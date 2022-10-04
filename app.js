@@ -5,22 +5,30 @@ let inputValue = document.querySelector("#input");
 async function getUser(url) {
   try {
     let userdata = await fetch(url);
-    return userdata.json();
-    cardProfile(res);
+    return  await userdata.json();
+    
   } catch (error) {
     createErrorcard("There is no profile with this username");
+    console.log(error.messsage);
   }
 }
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  getUser("https://api.github.com/users/" + inputValue.value).then(
-    (profile) => {
+  getUser("https://api.github.com/users/" + inputValue.value)
+    .then((profile) => {
       console.log(profile);
+      console.log(profile.message);
+     
 
       createCard(profile);
-    }
-  );
+      if (profile.message === "Not Found") {
+        createErrorcard("There is no profile with this username");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 function createCard(user) {
@@ -48,12 +56,12 @@ function createCard(user) {
     </div>`;
 }
 
-function createErrorcard(messsage) {
+ function createErrorcard(messsage) {
   let container = document.querySelector(".cardContainer");
   container.classList.add("cardContainer");
   container.innerHTML = `
   <div id="profileCard">
-<h1>${messsage}</h1>
+<h1 class="errorTitle">${messsage}</h1>
   </div>
   `;
-}
+} 

@@ -28,7 +28,7 @@ body {
 #profileCard {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: row;
   gap: 60px;
   background-color: rebeccapurple;
@@ -123,6 +123,11 @@ input:nth-child(2) {
   align-items: center;
   transition: all 0.3s ease;
   box-shadow: 1px 1px 10px #242964;
+}
+
+.errorTitle{
+  padding: 20px;
+  text-align: center;
 }
 
 @media screen and (max-width: 1000px) {
