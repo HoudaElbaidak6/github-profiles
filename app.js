@@ -8,7 +8,7 @@ async function getUser(url) {
     return userdata.json();
     cardProfile(res);
   } catch (error) {
-    output.textContent = "Erreur de connexion ";
+    createErrorcard("There is no profile with this username");
   }
 }
 
@@ -25,7 +25,7 @@ form.addEventListener("submit", (e) => {
 
 function createCard(user) {
   let container = document.querySelector(".cardContainer");
-  container.classList.add("cardContainer")
+  container.classList.add("cardContainer");
   container.innerHTML = `
   <div id="profileCard">
       <div class="imgDiv">
@@ -46,4 +46,14 @@ function createCard(user) {
         </ul>
       </div>
     </div>`;
+}
+
+function createErrorcard(messsage) {
+  let container = document.querySelector(".cardContainer");
+  container.classList.add("cardContainer");
+  container.innerHTML = `
+  <div id="profileCard">
+<h1>${messsage}</h1>
+  </div>
+  `;
 }
